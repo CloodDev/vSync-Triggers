@@ -15,9 +15,6 @@ debugprint = false -- don't touch this unless you know what you're doing or you'
 
 
 
-
-
-
 -------------------- DON'T CHANGE THIS --------------------
 AvailableWeatherTypes = {
     'EXTRASUNNY', 
@@ -105,6 +102,23 @@ RegisterCommand('freezeweather', function(source, args)
         end
     end
 end)
+
+RegisterNetEvent('vSync:setWeather')
+AddEventHandler('vSync:setWeather',function(weather,newBlackout)
+    for k,v in pairs(AvailableWeatherTypes) do 
+        if v = weather then
+            CurrentWeather = weather
+        end
+    end
+    blackout = newBlackout
+end)
+
+RegisterNetEvent('vSync:setTime')
+AddEventHandler('vSync:setTime',function(hour,min)
+    ShiftToMinute(min)
+    ShiftToHour(hour)
+end)
+
 
 RegisterCommand('weather', function(source, args)
     if source == 0 then
